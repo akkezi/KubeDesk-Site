@@ -636,10 +636,20 @@ h6 {
     .app-content {
         flex: 1;
         width: 100%;
+        height: calc(70vh - 52px); /* hauteur totale moins la sidebar */
         min-height: 400px;
-        /* Zone plus haute pour les animations nuage */
         overflow: hidden;
         position: relative;
+    }
+
+    /* content-grid doit hériter de la vraie hauteur de son parent */
+    .app-content .content-grid,
+    .app-content .tab-content,
+    .app-content .tab-content.active {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: block;
     }
 
     .sidebar-item {

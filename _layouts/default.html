@@ -140,80 +140,61 @@
         }
 
         function randomizeCards(container) {
-            requestAnimationFrame(() => {
+            // Double rAF : garantit que le DOM est peint et que le container a ses vraies dimensions
+            requestAnimationFrame(() => requestAnimationFrame(() => {
                 const cards = Array.from(container.querySelectorAll('.content-card'));
-                const isMobile = window.innerWidth <= 1024; // Increased threshold for tablets/large phones
-
-                // Adjust grid based on screen size
-                const count = cards.length;
-                let cols = 4;
-                let rows = 4;
-
-                // Desktop Grid Logic
-                // UNIVERSAL LOGIC: Deterministic Interpolated Distribution
-                // Works for both Mobile (2 cols) and Desktop (4 cols)
-                // Guaranteed to fill vertical space from 0% to 85%
-
-                // 1. Determine Columns based on width
-                // Match CSS breakpoint exact behavior if possible, or just use width
                 const isSmallScreen = window.innerWidth <= 1024;
-                const numCols = isSmallScreen ? 1 : 4;
 
-                // 2. Shuffle cards
+                // Vraies dimensions du container en pixels
+                const containerW = container.offsetWidth  || 300;
+                const containerH = container.offsetHeight || 400;
+
+                const CARD_W = isSmallScreen ? 120 : 160;
+                const CARD_H = 44;
+                const MARGIN = 8;
+
+                const numCols = isSmallScreen ? 2 : 4;
+
+                // Shuffle
                 cards.sort(() => Math.random() - 0.5);
 
-                // 3. Split into N columns
+                // Répartir en colonnes
                 const columns = Array.from({ length: numCols }, () => []);
-                cards.forEach((card, i) => {
-                    columns[i % numCols].push(card);
-                });
+                cards.forEach((card, i) => columns[i % numCols].push(card));
 
-                // 4. Distribute each column
                 columns.forEach((colItems, colIndex) => {
                     if (colItems.length === 0) return;
 
-                    // Calculate horizontal bounds for this column
-                    const colWidth = 100 / numCols;
-                    const xMin = (colIndex * colWidth);
-                    const xMax = xMin + colWidth - 10; // -10% padding
+                    const colPxWidth = containerW / numCols;
+                    const xMin = colIndex * colPxWidth + MARGIN;
+                    const xMax = xMin + colPxWidth - CARD_W - MARGIN;
 
                     colItems.forEach((card, i) => {
                         card.classList.remove('visible');
                         makeDraggable(card);
 
-                        // Vertical Interpolation: Pin 0% and 85%
-                        let BaseY = 0;
+                        // Répartition verticale sur toute la hauteur
+                        const usableH = containerH - CARD_H - MARGIN * 2;
+                        let baseY;
                         if (colItems.length > 1) {
-                            BaseY = (i / (colItems.length - 1)) * 80;
+                            baseY = (i / (colItems.length - 1)) * usableH;
                         } else {
-                            BaseY = 40; // Center if single item
+                            baseY = usableH / 2;
                         }
+                        const jitterY = (Math.random() - 0.5) * containerH * 0.12;
+                        const topPx = Math.max(MARGIN, Math.min(usableH + MARGIN, baseY + jitterY));
 
-                        // Jitter Y: +/- 8%
-                        const Top = Math.max(2, Math.min(82, BaseY + (Math.random() * 16 - 8)));
+                        // Position X dans la colonne
+                        const leftPx = Math.max(MARGIN, xMin + Math.random() * Math.max(0, xMax - xMin));
 
-                        // Random X within column
-                        // Random X within column
-                        let Left;
-                        if (isSmallScreen) {
-                            // Mobile : distribuer sur toute la largeur disponible
-                            // Les cartes font max 140px, la zone fait ~100% de l'écran
-                            // On réserve 5% de marge de chaque côté
-                            Left = 5 + (Math.random() * 55); // 5% → 60% (les cartes débordent sur le reste)
-                        } else {
-                            // Desktop
-                            Left = xMin + 5 + (Math.random() * (colWidth - 25));
-                        }
+                        card.style.left = leftPx + 'px';
+                        card.style.top  = topPx  + 'px';
 
-                        card.style.left = Left + '%';
-                        card.style.top = Top + '%';
-
-                        // Apply Dynamic Animation
                         applyAnimation(card, isSmallScreen);
-                        setTimeout(() => { card.classList.add('visible'); }, i * 50);
+                        setTimeout(() => { card.classList.add('visible'); }, i * 60);
                     });
                 });
-            });
+            }));
         }
 
         function applyAnimation(card, isMobile) {

@@ -107,7 +107,7 @@ title: Home
         <h2>Comprehensive Object Visibility</h2>
         <p class="subtitle">Explore the full capabilities of KubeDesk. Click on a category to view supported objects.</p>
         
-        <div class="app-simulator">
+    <div class="app-simulator">
             <!-- Sidebar -->
             <div class="app-sidebar">
                 <div class="sidebar-item active" onclick="switchTab(this, 'dashboard')">
@@ -132,10 +132,16 @@ title: Home
                     <span class="icon">🔑</span> Access Control
                 </div>
                 <div class="sidebar-item" onclick="switchTab(this, 'admission')">
-                    <span class="icon">🛡️</span> Admission & Dynamic
+                    <span class="icon">🛡️</span> Admission Control
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'dynamic')">
+                    <span class="icon">⚡</span> Dynamic Resource
                 </div>
                 <div class="sidebar-item" onclick="switchTab(this, 'applications')">
-                    <span class="icon">🚀</span> Applications & CRDs
+                    <span class="icon">🚀</span> Applications
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'crd')">
+                    <span class="icon">🧩</span> Custom Resources
                 </div>
             </div>
 
@@ -166,13 +172,15 @@ title: Home
                 <div id="workloads" class="tab-content">
                     <h3>📦 Workloads</h3>
                     <div class="content-grid">
-                        <div class="content-card">Pods & Templates</div>
+                        <div class="content-card">Pods</div>
+                        <div class="content-card">Pod Template</div>
                         <div class="content-card">Deployments</div>
                         <div class="content-card">StatefulSets</div>
                         <div class="content-card">DaemonSets</div>
                         <div class="content-card">ReplicaSets</div>
-                        <div class="content-card">Jobs & CronJobs</div>
                         <div class="content-card">Replication Controllers</div>
+                        <div class="content-card">Jobs</div>
+                        <div class="content-card">CronJobs</div>
                     </div>
                 </div>
 
@@ -180,10 +188,10 @@ title: Home
                 <div id="configuration" class="tab-content">
                     <h3>⚙️ Configuration</h3>
                     <div class="content-grid">
-                        <div class="content-card">ConfigMaps</div>
+                        <div class="content-card">Config Maps</div>
                         <div class="content-card">Secrets</div>
                         <div class="content-card">Runtime Classes</div>
-                        <div class="content-card">HPA</div>
+                        <div class="content-card">Horizontal Pod Autoscalers</div>
                         <div class="content-card">Pod Disruption Budgets</div>
                         <div class="content-card">Priority Classes</div>
                     </div>
@@ -194,8 +202,10 @@ title: Home
                     <h3>🌐 Networking</h3>
                     <div class="content-grid">
                         <div class="content-card">Services</div>
-                        <div class="content-card">Endpoints & Slices</div>
-                        <div class="content-card">Ingress & Classes</div>
+                        <div class="content-card">Endpoints</div>
+                        <div class="content-card">Endpoint Slices</div>
+                        <div class="content-card">Ingress</div>
+                        <div class="content-card">Ingress Classes</div>
                         <div class="content-card">Network Policies</div>
                     </div>
                 </div>
@@ -206,9 +216,12 @@ title: Home
                     <div class="content-grid">
                         <div class="content-card">Storage Classes</div>
                         <div class="content-card">Persistent Volumes</div>
-                        <div class="content-card">Volume Claims (PVC)</div>
+                        <div class="content-card">Persistent Volume Claims</div>
                         <div class="content-card">Volume Attachments</div>
-                        <div class="content-card">CSI Drivers & Nodes</div>
+                        <div class="content-card">Volume Attributes Classes</div>
+                        <div class="content-card">CSI Drivers</div>
+                        <div class="content-card">CSI Nodes</div>
+                        <div class="content-card">CSI Storage Capacities</div>
                     </div>
                 </div>
 
@@ -217,32 +230,57 @@ title: Home
                     <h3>🔑 Access Control</h3>
                     <div class="content-grid">
                         <div class="content-card">Service Accounts</div>
-                        <div class="content-card">Roles & Bindings</div>
-                        <div class="content-card">Cluster Roles & Bindings</div>
-                        <div class="content-card">CSR</div>
+                        <div class="content-card">Roles</div>
+                        <div class="content-card">Role Bindings</div>
+                        <div class="content-card">Cluster Roles</div>
+                        <div class="content-card">Cluster Role Bindings</div>
+                        <div class="content-card">Certificate Signing Request</div>
                     </div>
                 </div>
 
-                <!-- Admission -->
+                <!-- Admission Control -->
                 <div id="admission" class="tab-content">
-                    <h3>🛡️ Admission & Dynamic</h3>
+                    <h3>🛡️ Admission Control</h3>
                     <div class="content-grid">
-                        <div class="content-card">Mutating Webhooks</div>
-                        <div class="content-card">Validating Webhooks</div>
-                        <div class="content-card">Validating Policies</div>
+                        <div class="content-card">Mutating Webhook Configurations</div>
+                        <div class="content-card">Validating Webhook Configurations</div>
+                        <div class="content-card">Validating Admission Policies</div>
+                        <div class="content-card">Validating Admission Policy Bindings</div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Resource Allocation -->
+                <div id="dynamic" class="tab-content">
+                    <h3>⚡ Dynamic Resource Allocation</h3>
+                    <div class="content-grid">
                         <div class="content-card">Device Classes</div>
                         <div class="content-card">Resource Claims</div>
+                        <div class="content-card">Resource Claim Templates</div>
+                        <div class="content-card">Resource Slices</div>
                     </div>
                 </div>
 
                 <!-- Applications -->
                 <div id="applications" class="tab-content">
-                    <h3>🚀 Applications & CRDs</h3>
+                    <h3>🚀 Applications</h3>
                     <div class="content-grid">
-                        <div class="content-card">Helm Charts & Releases</div>
-                        <div class="content-card">Repositories</div>
-                        <div class="content-card">Custom Resource Definitions</div>
+                        <div class="content-card">Helm Charts</div>
+                        <div class="content-card">Helm Repositories</div>
+                        <div class="content-card">Helm Releases</div>
+                        <div class="content-card">Kustomize (Planned)</div>
+                        <div class="content-card">Operator Lifecycle Manager (Planned)</div>
                         <div class="content-card">GitOps (Planned)</div>
+                        <div class="content-card">Argo CD (Planned)</div>
+                        <div class="content-card">Flux CD (Planned)</div>
+                    </div>
+                </div>
+
+                <!-- Custom Resources -->
+                <div id="crd" class="tab-content">
+                    <h3>🧩 Custom Resources</h3>
+                    <div class="content-grid">
+                        <div class="content-card">Definitions</div>
+                        <div class="content-card">CRDs</div>
                     </div>
                 </div>
             </div>

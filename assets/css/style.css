@@ -109,8 +109,15 @@ h6 {
 
 /* Hero */
 .hero {
-    padding: 120px 0 80px;
+    padding: 80px 0 80px;
+    /* Reduced top padding */
     text-align: center;
+}
+
+.hero-logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 20px;
 }
 
 .hero h1 {
@@ -187,27 +194,27 @@ padding: 0 20px;
     padding: 16px 24px;
     border-radius: 12px;
     /* Slightly squarer for "pro" look */
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Solid Black/Dark for high contrast like reference */
+    background: #0d1117;
     font-family: var(--font-stack);
     min-width: 260px;
     color: #ffffff;
     text-decoration: none;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-pill:hover {
     transform: translateY(-2px);
-    border-color: var(--primary-color);
-    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.25), inset 0 0 20px rgba(124, 58, 237, 0.05);
-    background: rgba(255, 255, 255, 0.06);
+    border-color: #ffffff;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    background: #161b22;
 }
 
 .btn-pill:active {

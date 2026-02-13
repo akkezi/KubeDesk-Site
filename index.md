@@ -5,6 +5,7 @@ title: Home
 
 <section class="hero">
     <div class="container">
+        <img src="{{ site.baseurl }}/assets/images/logo.png" alt="KubeDesk Logo" class="hero-logo">
         <h1>The Desktop Client for Kubernetes Cluster Management</h1>
         <p class="subtitle">Gain complete visibility into your clusters. Browse, inspect, and analyze all Kubernetes objects in real-time. Built with Electron, React, and Go.</p>
         

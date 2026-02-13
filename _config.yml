@@ -1,0 +1,5 @@
+title: KubeDesk
+description: Native Kubernetes Desktop App for Windows, macOS, and Linux
+theme: jekyll-theme-prime
+plugins:
+  - jekyll-seo-tag

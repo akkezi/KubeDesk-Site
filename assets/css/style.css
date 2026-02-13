@@ -124,102 +124,132 @@ h6 {
 }
 
 .hero .subtitle {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     color: #8b949e;
-    max-width: 700px;
-    margin: 0 auto 40px;
+    max-width: 650px;
+    margin: 0 auto 50px;
     font-weight: 400;
+    line-height: 1.6;
 }
 
-display: flex;
-justify-content: center;
-gap: 30px;
-/* Increased gap */
-flex-wrap: wrap;
-margin-bottom: 80px;
-/* Increased bottom margin */
-align-items: center;
-width: 100%;
+.hero-image {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
-/* Base Pill Button */
+/* Hero Glow Effect */
+.hero-image::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, rgba(124, 58, 237, 0.05) 50%, transparent 70%);
+    filter: blur(60px);
+    z-index: -1;
+}
+
+.app-screenshot {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    /* Glass border */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.8);
+    background-color: #0d1117;
+}
+
+.download-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 80px;
+    align-items: center;
+    width: 100%;
+}
+
+/* Base Pill Button - Glassmorphism */
 .btn-pill {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    /* Space out icon, text, arrow */
     gap: 15px;
-    padding: 15px 30px;
-    border-radius: 50px;
-    /* Pill shape */
-    font-weight: 600;
-    font-size: 1rem;
+    padding: 16px 24px;
+    border-radius: 12px;
+    /* Slightly squarer for "pro" look */
+    font-weight: 500;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-    border: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     font-family: var(--font-stack);
-    min-width: 240px;
-    /* Ensured width */
-    white-space: nowrap;
-    /* Prevent line wrapping */
+    min-width: 260px;
+    color: #ffffff;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-pill:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.25), inset 0 0 20px rgba(124, 58, 237, 0.05);
+    background: rgba(255, 255, 255, 0.06);
 }
 
-/* macOS Button: Black Pill with Border */
-.btn-mac {
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #ffffff;
+.btn-pill:active {
+    transform: translateY(0);
 }
 
-.btn-mac:hover {
-    background-color: #1a1a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-}
-
-/* Windows Button: Black Pill with Border */
-.btn-win {
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #ffffff;
-}
-
-.btn-win:hover {
-    background-color: #1a1a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-}
-
-/* Linux Button: Black Pill with Border */
+/* Specific OS styling (now unified, but kept for specificity if needed later) */
+.btn-mac,
+.btn-win,
 .btn-linux {
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #ffffff;
+    /* Styles handled by base .btn-pill for consistency */
 }
 
-.btn-linux:hover {
-    background-color: #1a1a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+/* Icons - STRICT SIZING */
+.os-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    /* Prevent shrinking */
+    flex-shrink: 0;
+    fill: currentColor;
+    opacity: 0.9;
 }
 
-/* Arrow Icon Style */
 .arrow-icon {
     width: 16px;
     height: 16px;
+    min-width: 16px;
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: transform 0.2s;
     margin-left: auto;
-    /* Push to right */
-    opacity: 0.8;
+}
+
+.btn-pill:hover .arrow-icon {
+    transform: translateY(2px);
+    opacity: 1;
+    color: var(--primary-color);
 }
 
 .btn-pill span {
     flex-grow: 1;
-    /* Center text */
-    text-align: center;
+    text-align: left;
+    /* Align text left of center */
+    font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 /* Dropdown Container */
@@ -295,17 +325,7 @@ width: 100%;
     }
 }
 
-.app-screenshot {
-    width: 100%;
-    max-width: 1000px;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 20px 50px -10px rgba(124, 58, 237, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
-    background-color: transparent;
-    border: none;
-    display: block;
-    margin: 0 auto;
-}
+/* Old app-screenshot rule removed, replaced above */
 
 /* Object Visibility Grid */
 .object-visibility {

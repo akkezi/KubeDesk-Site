@@ -43,6 +43,49 @@
         </div>
     </footer>
 
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/akkezi/KubeDesk" target="_blank">GitHub</a>
+                <a href="#">Documentation</a>
+                <a href="https://github.com/akkezi/KubeDesk/issues" target="_blank">Report an Issue</a>
+            </div>
+            <p style="color: #484f58; font-size: 0.85rem;">&copy; {{ site.time | date: '%Y' }} KubeDesk</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        function openLightbox(img) {
+            var lightbox = document.getElementById("lightbox");
+            var lightboxImg = document.getElementById("lightbox-img");
+            var caption = document.getElementById("caption");
+
+            lightbox.style.display = "flex";
+            lightboxImg.src = img.src;
+            caption.innerHTML = img.alt;
+            document.body.style.overflow = "hidden"; // Prevent scrolling
+        }
+
+        function closeLightbox() {
+            var lightbox = document.getElementById("lightbox");
+            lightbox.style.display = "none";
+            document.body.style.overflow = "auto"; // Restore scrolling
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                closeLightbox();
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -89,11 +89,11 @@ title: Home
 <section class="gallery">
     <div class="container">
         <div class="gallery-scroll">
-            <img src="{{ site.baseurl }}/assets/images/screenshots/002.png" alt="Cluster View">
-            <img src="{{ site.baseurl }}/assets/images/screenshots/003.png" alt="Pod Details">
-            <img src="{{ site.baseurl }}/assets/images/screenshots/004.png" alt="Terminal">
-            <img src="{{ site.baseurl }}/assets/images/screenshots/005.png" alt="Settings">
-             <img src="{{ site.baseurl }}/assets/images/screenshots/009.png" alt="Logs">
+            <img src="{{ site.baseurl }}/assets/images/screenshots/002.png" alt="Cluster View" onclick="openLightbox(this)">
+            <img src="{{ site.baseurl }}/assets/images/screenshots/003.png" alt="Pod Details" onclick="openLightbox(this)">
+            <img src="{{ site.baseurl }}/assets/images/screenshots/004.png" alt="Terminal" onclick="openLightbox(this)">
+            <img src="{{ site.baseurl }}/assets/images/screenshots/005.png" alt="Settings" onclick="openLightbox(this)">
+            <img src="{{ site.baseurl }}/assets/images/screenshots/009.png" alt="Logs" onclick="openLightbox(this)">
         </div>
     </div>
 </section>

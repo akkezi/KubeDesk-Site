@@ -428,7 +428,8 @@ h6 {
     color: #c9d1d9;
     font-size: 0.95rem;
     position: absolute;
-    transition: all 0.3s ease;
+    /* Remove transition for top/left to make dragging snappy */
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.5s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -443,12 +444,126 @@ h6 {
     /* Ensure cards don't get too wide/small */
     min-width: 120px;
     max-width: 200px;
+    cursor: grab;
+    /* Indicate draggable */
+    user-select: none;
+    /* Prevent text selection while dragging */
+    touch-action: none;
+    /* Prevent browser scrolling while dragging */
+}
+
+.content-card:active {
+    cursor: grabbing;
 }
 
 .content-card.visible {
     opacity: 1;
     transform: scale(1);
-    animation: float 4s ease-in-out infinite;
+    /* Animation assigned via JS for randomness */
+}
+
+/* Animations "In all directions" */
+@keyframes float {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(0, -10px) scale(1);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes float1 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(10px, -15px) scale(1);
+    }
+
+    66% {
+        transform: translate(-5px, 10px) scale(1);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes float2 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-15px, -5px) scale(1);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes float3 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        transform: translate(10px, 10px) scale(1);
+    }
+
+    75% {
+        transform: translate(-10px, -10px) scale(1);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .app-simulator {
+        flex-direction: column;
+        min-height: 80vh;
+        /* Taller on mobile to fit items */
+    }
+
+    .app-sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        height: 60px;
+        /* Fixed height for header */
+        flex-shrink: 0;
+    }
+
+    .app-content {
+        height: calc(100% - 60px);
+        /* Fill remaining space */
+    }
+
+    .sidebar-item {
+        padding: 5px 15px;
+        /* Smaller padding */
+        gap: 8px;
+        font-size: 0.85rem;
+    }
+
+    .content-card {
+        padding: 10px 15px;
+        min-width: 100px;
+        font-size: 0.85rem;
+    }
 }
 
 .content-card {

@@ -140,19 +140,23 @@
         }
 
         function randomizeCards(container) {
-            // Wait for display:block to take effect
             requestAnimationFrame(() => {
                 const cards = Array.from(container.querySelectorAll('.content-card'));
-                const containerRect = container.querySelector('.content-grid').getBoundingClientRect();
+                const isMobile = window.innerWidth <= 768;
 
-                // Use a flexible grid based on card count to maximize spread
-                // If few cards, use fewer cols/rows to center them but spread out
+                // Adjust grid based on screen size
                 const count = cards.length;
                 let cols = 4;
                 let rows = 4;
 
-                if (count <= 6) { cols = 3; rows = 2; }
-                else if (count <= 10) { cols = 4; rows = 3; }
+                if (isMobile) {
+                    cols = 2;
+                    // Calculate rows needed + extra space
+                    rows = Math.ceil(count / cols) + 1;
+                } else {
+                    if (count <= 6) { cols = 3; rows = 2; }
+                    else if (count <= 10) { cols = 4; rows = 3; }
+                }
 
                 const slots = [];
                 for (let r = 0; r < rows; r++) {
@@ -160,43 +164,103 @@
                         slots.push({ x: c, y: r });
                     }
                 }
-
-                // Shuffle slots
                 slots.sort(() => Math.random() - 0.5);
 
                 cards.forEach((card, index) => {
-                    // Reset interactions
                     card.classList.remove('visible');
+                    // Enable Drag
+                    makeDraggable(card);
 
                     if (index < slots.length) {
                         const slot = slots[index];
-
-                        // Base position (percentage)
-                        // Spread them out more by using the full range minus margins
-                        const stepX = 90 / cols; // 90% usable width
-                        const stepY = 80 / rows; // 80% usable height
+                        const stepX = isMobile ? (90 / cols) : (90 / cols);
+                        const stepY = isMobile ? (85 / rows) : (80 / rows);
 
                         const BaseX = 5 + (slot.x * stepX);
                         const BaseY = 10 + (slot.y * stepY);
 
-                        // Larger random offset for "Cloud" feel
-                        const offsetX = (Math.random() - 0.5) * 15;
-                        const offsetY = (Math.random() - 0.5) * 15;
+                        // Mobile: less random offset to prevent overlap
+                        const variance = isMobile ? 5 : 15;
+                        const offsetX = (Math.random() - 0.5) * variance;
+                        const offsetY = (Math.random() - 0.5) * variance;
 
                         card.style.left = Math.max(0, Math.min(90, BaseX + offsetX)) + '%';
                         card.style.top = Math.max(0, Math.min(90, BaseY + offsetY)) + '%';
 
-                        // Faster animation speed as requested
-                        card.style.animationDelay = (Math.random() * 1.5) + 's';
-                        card.style.animationDuration = (2 + Math.random() * 2) + 's'; // 2s to 4s cycle
+                        // Assign random chaotic animation
+                        const anims = ['float', 'float1', 'float2', 'float3'];
+                        const randomAnim = anims[Math.floor(Math.random() * anims.length)];
 
-                        // Pop in effect
+                        card.style.animationName = randomAnim;
+                        card.style.animationDelay = (Math.random() * 1.5) + 's';
+                        card.style.animationDuration = isMobile ? (3 + Math.random() * 2) + 's' : (2 + Math.random() * 3) + 's';
+
                         setTimeout(() => {
                             card.classList.add('visible');
-                        }, index * 30); // Faster stagger
+                        }, index * 30);
                     }
                 });
             });
+        }
+
+        function makeDraggable(element) {
+            let isDragging = false;
+            let startX, startY, initialLeft, initialTop;
+
+            const onStart = (e) => {
+                isDragging = true;
+                // Get touch or mouse position
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                startX = clientX;
+                startY = clientY;
+
+                const style = window.getComputedStyle(element);
+                initialLeft = parseFloat(style.left);
+                initialTop = parseFloat(style.top);
+
+                // Stop animation while dragging
+                element.style.animation = 'none';
+                element.style.zIndex = 100; // Bring to front
+                element.style.cursor = 'grabbing';
+            };
+
+            const onMove = (e) => {
+                if (!isDragging) return;
+                e.preventDefault(); // Stop scrolling
+
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                const dx = clientX - startX;
+                const dy = clientY - startY;
+
+                // Convert pixels to % roughly for the container? 
+                // Easier to just use pixels for drag, but let's try to update the left/top styles
+                // Since parent is relative, we can add pixels to the computed left/top
+
+                element.style.left = (initialLeft + dx) + 'px';
+                element.style.top = (initialTop + dy) + 'px';
+            };
+
+            const onEnd = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                element.style.cursor = 'grab';
+                element.style.zIndex = '';
+                // Optional: Resume animation? User might want it to stay put.
+                // Leaving animation off makes it feel like you "placed" it.
+            };
+
+            element.addEventListener('mousedown', onStart);
+            element.addEventListener('touchstart', onStart, { passive: false });
+
+            window.addEventListener('mousemove', onMove);
+            window.addEventListener('touchmove', onMove, { passive: false });
+
+            window.addEventListener('mouseup', onEnd);
+            window.addEventListener('touchend', onEnd);
         }
 
         // Init first tab on load

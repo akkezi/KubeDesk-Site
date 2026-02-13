@@ -531,25 +531,22 @@ h6 {
 }
 
 /* Mobile specific dynamic animation (larger movement) */
-@keyframes float-mobile {
+/* Mobile specific: Horizontal Oscillation (Ping-Pong) */
+@keyframes oscillate-horizontal {
     0% {
-        transform: translate(0, 0);
+        transform: translateX(0);
     }
 
-    25% {
-        transform: translate(15px, 30px);
+    35% {
+        transform: translateX(40px);
     }
 
-    50% {
-        transform: translate(-15px, 0px);
-    }
-
-    75% {
-        transform: translate(10px, -30px);
+    65% {
+        transform: translateX(-40px);
     }
 
     100% {
-        transform: translate(0, 0);
+        transform: translateX(0);
     }
 }
 

@@ -194,7 +194,8 @@
                         const Top = Math.max(0, Math.min(90, BaseY + (Math.random() * 10 - 5)));
 
                         // Random X within column
-                        const Left = xMin + 2 + (Math.random() * (colWidth - 15));
+                        // More padding (15%) to allow for Horizontal Oscillation
+                        const Left = xMin + 5 + (Math.random() * (colWidth - 25));
 
                         card.style.left = Left + '%';
                         card.style.top = Top + '%';
@@ -211,15 +212,13 @@
             const anims = ['float', 'float1', 'float2', 'float3'];
             let randomAnim = anims[Math.floor(Math.random() * anims.length)];
 
-            // On Mobile, use the dedicated dynamic animation
-            if (isMobile) {
-                randomAnim = 'float-mobile';
-            }
+            // UNIVERSAL: Force Horizontal Oscillation for everyone (as per request)
+            randomAnim = 'oscillate-horizontal';
 
             card.style.animationName = randomAnim;
-            // Faster speed: 1s to 3s cycle (Mobile)
-            card.style.animationDuration = isMobile ? (2 + Math.random() * 2) + 's' : (2 + Math.random() * 2) + 's';
-            card.style.animationDelay = (Math.random() * 1) + 's';
+            // Slow smooth speed: 4s to 7s cycle
+            card.style.animationDuration = (4 + Math.random() * 3) + 's';
+            card.style.animationDelay = (Math.random() * 2) + 's';
         }
 
         function makeDraggable(element) {

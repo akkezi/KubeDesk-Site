@@ -114,6 +114,25 @@
                 if (event.key === "ArrowRight") changeSlide(1);
             }
         });
+
+        // App Simulator Logic
+        function switchTab(element, categoryId) {
+            // Remove active class from all sidebar items
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Remove active class from all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Add active class to clicked item
+            element.classList.add('active');
+
+            // Show target content
+            document.getElementById(categoryId).classList.add('active');
+        }
     </script>
 </body>
 

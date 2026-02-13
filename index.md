@@ -102,96 +102,149 @@ title: Home
     </div>
 </section>
 
-<section class="object-visibility">
+<section class="app-simulator-section">
     <div class="container">
         <h2>Comprehensive Object Visibility</h2>
-        <p class="subtitle">Access detailed information for every Kubernetes object without touching the CLI.</p>
-        <div class="object-grid">
-            <div class="object-category">
-                <h3>Dashboard & Events</h3>
-                <ul>
-                    <li>Dashboard Overview</li>
-                    <li>Cluster Events</li>
-                </ul>
+        <p class="subtitle">Explore the full capabilities of KubeDesk. Click on a category to view supported objects.</p>
+        
+        <div class="app-simulator">
+            <!-- Sidebar -->
+            <div class="app-sidebar">
+                <div class="sidebar-item active" onclick="switchTab(this, 'dashboard')">
+                    <span class="icon">📊</span> Dashboard & Events
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'infrastructure')">
+                    <span class="icon">🏗️</span> Infrastructure
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'workloads')">
+                    <span class="icon">📦</span> Workloads
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'configuration')">
+                    <span class="icon">⚙️</span> Configuration
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'networking')">
+                    <span class="icon">🌐</span> Networking
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'storage')">
+                    <span class="icon">💾</span> Storage
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'access')">
+                    <span class="icon">🔑</span> Access Control
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'admission')">
+                    <span class="icon">🛡️</span> Admission & Dynamic
+                </div>
+                <div class="sidebar-item" onclick="switchTab(this, 'applications')">
+                    <span class="icon">🚀</span> Applications & CRDs
+                </div>
             </div>
-            <div class="object-category">
-                <h3>Infrastructure</h3>
-                <ul>
-                    <li>Nodes</li>
-                    <li>Namespaces</li>
-                    <li>Resource Quotas</li>
-                    <li>Limit Ranges</li>
-                    <li>Leases</li>
-                </ul>
-            </div>
-            <div class="object-category">
-                <h3>Workloads</h3>
-                <ul>
-                    <li>Pods & Templates</li>
-                    <li>Deployments</li>
-                    <li>StatefulSets</li>
-                    <li>DaemonSets</li>
-                    <li>ReplicaSets</li>
-                    <li>Jobs & CronJobs</li>
-                    <li>Replication Controllers</li>
-                </ul>
-            </div>
-             <div class="object-category">
-                <h3>Configuration</h3>
-                <ul>
-                    <li>ConfigMaps</li>
-                    <li>Secrets</li>
-                    <li>Runtime Classes</li>
-                    <li>HPA</li>
-                    <li>Pod Disruption Budgets</li>
-                    <li>Priority Classes</li>
-                </ul>
-            </div>
-            <div class="object-category">
-                <h3>Networking</h3>
-                <ul>
-                    <li>Services</li>
-                    <li>Endpoints & Slices</li>
-                    <li>Ingress & Classes</li>
-                    <li>Network Policies</li>
-                </ul>
-            </div>
-            <div class="object-category">
-                <h3>Storage</h3>
-                <ul>
-                    <li>Storage Classes</li>
-                    <li>Persistent Volumes (PV)</li>
-                    <li>Volume Claims (PVC)</li>
-                    <li>Volume Attachments</li>
-                    <li>CSI Drivers & Nodes</li>
-                </ul>
-            </div>
-            <div class="object-category">
-                <h3>Access Control</h3>
-                <ul>
-                    <li>Service Accounts</li>
-                    <li>Roles & Bindings</li>
-                    <li>Cluster Roles & Bindings</li>
-                    <li>CSR</li>
-                </ul>
-            </div>
-            <div class="object-category">
-                <h3>Admission & Dynamic</h3>
-                <ul>
-                    <li>Mutating/Validating Webhooks</li>
-                    <li>Validating Policies</li>
-                    <li>Device Classes</li>
-                    <li>Resource Claims</li>
-                </ul>
-            </div>
-             <div class="object-category">
-                <h3>Applications & CRDs</h3>
-                <ul>
-                    <li>Helm Charts & Releases</li>
-                    <li>Repositories</li>
-                    <li>Custom Resource Definitions</li>
-                    <li>GitOps (Planned)</li>
-                </ul>
+
+            <!-- Content Area -->
+            <div class="app-content">
+                <!-- Dashboard -->
+                <div id="dashboard" class="tab-content active">
+                    <h3>📊 Dashboard & Events</h3>
+                    <div class="content-grid">
+                        <div class="content-card">Dashboard Overview</div>
+                        <div class="content-card">Cluster Events</div>
+                    </div>
+                </div>
+
+                <!-- Infrastructure -->
+                <div id="infrastructure" class="tab-content">
+                    <h3>🏗️ Infrastructure</h3>
+                    <div class="content-grid">
+                        <div class="content-card">Nodes</div>
+                        <div class="content-card">Namespaces</div>
+                        <div class="content-card">Resource Quotas</div>
+                        <div class="content-card">Limit Ranges</div>
+                        <div class="content-card">Leases</div>
+                    </div>
+                </div>
+
+                <!-- Workloads -->
+                <div id="workloads" class="tab-content">
+                    <h3>📦 Workloads</h3>
+                    <div class="content-grid">
+                        <div class="content-card">Pods & Templates</div>
+                        <div class="content-card">Deployments</div>
+                        <div class="content-card">StatefulSets</div>
+                        <div class="content-card">DaemonSets</div>
+                        <div class="content-card">ReplicaSets</div>
+                        <div class="content-card">Jobs & CronJobs</div>
+                        <div class="content-card">Replication Controllers</div>
+                    </div>
+                </div>
+
+                <!-- Configuration -->
+                <div id="configuration" class="tab-content">
+                    <h3>⚙️ Configuration</h3>
+                    <div class="content-grid">
+                        <div class="content-card">ConfigMaps</div>
+                        <div class="content-card">Secrets</div>
+                        <div class="content-card">Runtime Classes</div>
+                        <div class="content-card">HPA</div>
+                        <div class="content-card">Pod Disruption Budgets</div>
+                        <div class="content-card">Priority Classes</div>
+                    </div>
+                </div>
+
+                <!-- Networking -->
+                <div id="networking" class="tab-content">
+                    <h3>🌐 Networking</h3>
+                    <div class="content-grid">
+                        <div class="content-card">Services</div>
+                        <div class="content-card">Endpoints & Slices</div>
+                        <div class="content-card">Ingress & Classes</div>
+                        <div class="content-card">Network Policies</div>
+                    </div>
+                </div>
+
+                <!-- Storage -->
+                <div id="storage" class="tab-content">
+                    <h3>💾 Storage</h3>
+                    <div class="content-grid">
+                        <div class="content-card">Storage Classes</div>
+                        <div class="content-card">Persistent Volumes</div>
+                        <div class="content-card">Volume Claims (PVC)</div>
+                        <div class="content-card">Volume Attachments</div>
+                        <div class="content-card">CSI Drivers & Nodes</div>
+                    </div>
+                </div>
+
+                <!-- Access Control -->
+                <div id="access" class="tab-content">
+                    <h3>🔑 Access Control</h3>
+                    <div class="content-grid">
+                        <div class="content-card">Service Accounts</div>
+                        <div class="content-card">Roles & Bindings</div>
+                        <div class="content-card">Cluster Roles & Bindings</div>
+                        <div class="content-card">CSR</div>
+                    </div>
+                </div>
+
+                <!-- Admission -->
+                <div id="admission" class="tab-content">
+                    <h3>🛡️ Admission & Dynamic</h3>
+                    <div class="content-grid">
+                        <div class="content-card">Mutating Webhooks</div>
+                        <div class="content-card">Validating Webhooks</div>
+                        <div class="content-card">Validating Policies</div>
+                        <div class="content-card">Device Classes</div>
+                        <div class="content-card">Resource Claims</div>
+                    </div>
+                </div>
+
+                <!-- Applications -->
+                <div id="applications" class="tab-content">
+                    <h3>🚀 Applications & CRDs</h3>
+                    <div class="content-grid">
+                        <div class="content-card">Helm Charts & Releases</div>
+                        <div class="content-card">Repositories</div>
+                        <div class="content-card">Custom Resource Definitions</div>
+                        <div class="content-card">GitOps (Planned)</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

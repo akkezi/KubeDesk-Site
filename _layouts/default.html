@@ -151,8 +151,10 @@
 
                 if (isMobile) {
                     cols = 2;
-                    // Calculate rows needed + extra space
-                    rows = Math.ceil(count / cols) + 1;
+                    // Calculate exact rows needed
+                    rows = Math.ceil(count / cols);
+                    // Ensure at least 2 rows for spacing calculation
+                    if (rows < 2) rows = 2;
                 } else {
                     if (count <= 6) { cols = 3; rows = 2; }
                     else if (count <= 10) { cols = 4; rows = 3; }
@@ -173,8 +175,20 @@
 
                     if (index < slots.length) {
                         const slot = slots[index];
-                        const stepX = isMobile ? (90 / cols) : (90 / cols);
-                        const stepY = isMobile ? (85 / rows) : (80 / rows);
+
+                        // Default steps
+                        let stepX = 90 / cols;
+                        let stepY = 80 / rows;
+
+                        // Mobile: Force full usage of vertical space
+                        if (isMobile) {
+                            stepX = 90 / cols;
+                            // Spread rows to cover 10% to 90%
+                            // If rows=2: y=0(10%), y=1(90%). Step = 80
+                            // If rows=3: y=0(10%), y=1(50%), y=2(90%). Step = 40
+                            const safeRows = rows > 1 ? rows - 1 : 1;
+                            stepY = 80 / safeRows;
+                        }
 
                         const BaseX = 5 + (slot.x * stepX);
                         const BaseY = 10 + (slot.y * stepY);

@@ -144,10 +144,16 @@
             requestAnimationFrame(() => requestAnimationFrame(() => {
                 const isSmallScreen = window.innerWidth <= 1024;
 
-                // Mesurer le vrai container de positionnement (.app-content)
-                const appContent = container.closest('.app-content') || container;
-                const containerW = appContent.offsetWidth  || 320;
-                const containerH = appContent.offsetHeight || 380;
+                // Mesurer le parent direct du container (app-content ou équivalent)
+                // On remonte jusqu'à trouver un élément avec une vraie hauteur
+                let sizeRef = container.parentElement || container;
+                let containerW = sizeRef.offsetWidth;
+                let containerH = sizeRef.offsetHeight;
+                // Fallback si le parent n'a pas de hauteur définie
+                if (!containerH || containerH < 50) {
+                    containerW = container.offsetWidth || 320;
+                    containerH = isSmallScreen ? 360 : 460;
+                }
 
                 const CARD_W  = isSmallScreen ? 130 : 160;
                 const CARD_H  = 40;

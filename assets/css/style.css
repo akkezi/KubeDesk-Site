@@ -513,21 +513,19 @@ h6 {
 }
 
 @keyframes float3 {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
+    0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(10px, 10px) scale(1); }
+    75% { transform: translate(-10px, -10px) scale(1); }
+    100% { transform: translate(0, 0) scale(1); }
+}
 
-    25% {
-        transform: translate(10px, 10px) scale(1);
-    }
-
-    75% {
-        transform: translate(-10px, -10px) scale(1);
-    }
-
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
+/* Mobile specific dynamic animation (larger movement) */
+@keyframes float-mobile {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(15px, 30px); }
+    50% { transform: translate(-15px, 0px); }
+    75% { transform: translate(10px, -30px); }
+    100% { transform: translate(0, 0); }
 }
 
 /* Mobile Responsive */

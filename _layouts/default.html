@@ -189,45 +189,54 @@
                         }
                     });
                 } else {
-                    // MOBILE: Deterministic "Zoned" Distribution
-                    // 1. Shuffle cards to mix content positions
+                    // MOBILE: Deterministic "Interpolated" Scale
+                    // Guaranteed to fill from 0% to 90% regardless of item count
+                    
+                    // 1. Shuffle
                     cards.sort(() => Math.random() - 0.5);
-
-                    // 2. Split into 2 columns for better spread
+                    
+                    // 2. Split (optional, but good for density)
                     const col1 = [];
                     const col2 = [];
                     cards.forEach((card, i) => {
                         if (i % 2 === 0) col1.push(card);
                         else col2.push(card);
                     });
-
-                    // 3. Helper to position a column
+                    
+                    // 3. Helper: Distribute by pinning first/last to edges
                     const distributeColumn = (items, xMin, xMax) => {
-                        const rowHeight = 90 / items.length; // Divide 90% height by item count
+                        if (items.length === 0) return;
+                        
                         items.forEach((card, i) => {
                             card.classList.remove('visible');
                             makeDraggable(card);
-
-                            // Vertical: Guaranteed slot + random jitter
-                            // e.g., if 4 items: 0-22%, 22-45%, 45-67%, 67-90%
-                            const BaseY = (i * rowHeight) + 2; // +2% padding/offset
-                            const JitterY = Math.random() * (rowHeight * 0.4); // Jitter up to 40% of slot height
-                            const Top = BaseY + JitterY;
-
-                            // Horizontal: Random within column bounds
+                            
+                            // Interpolated Y: 
+                            // i=0 -> 0%
+                            // i=max -> 85%
+                            // If only 1 item -> 40% (center)
+                            let BaseY = 0;
+                            if (items.length > 1) {
+                                BaseY = (i / (items.length - 1)) * 85; 
+                            } else {
+                                BaseY = 40;
+                            }
+                            
+                            // Add randomness to Y (Jitter +/- 5%)
+                            const Top = Math.max(0, Math.min(90, BaseY + (Math.random() * 10 - 5)));
+                            
+                            // Random X in col
                             const Left = xMin + (Math.random() * (xMax - xMin));
-
+                            
                             card.style.top = Top + '%';
                             card.style.left = Left + '%';
-
+                            
                             applyAnimation(card, true);
                             setTimeout(() => { card.classList.add('visible'); }, i * 50);
                         });
                     };
-
-                    // Left Column (0% - 40%)
+                    
                     distributeColumn(col1, 0, 40);
-                    // Right Column (50% - 90%)
                     distributeColumn(col2, 50, 95);
                 }
             });
@@ -235,11 +244,16 @@
 
         function applyAnimation(card, isMobile) {
             const anims = ['float', 'float1', 'float2', 'float3'];
-            const randomAnim = anims[Math.floor(Math.random() * anims.length)];
+            let randomAnim = anims[Math.floor(Math.random() * anims.length)];
+            
+            // On Mobile, use the dedicated dynamic animation
+            if (isMobile) {
+                randomAnim = 'float-mobile';
+            }
 
             card.style.animationName = randomAnim;
             // Faster speed: 1s to 3s cycle (Mobile)
-            card.style.animationDuration = isMobile ? (1 + Math.random() * 2) + 's' : (2 + Math.random() * 2) + 's';
+            card.style.animationDuration = isMobile ? (2 + Math.random() * 2) + 's' : (2 + Math.random() * 2) + 's';
             card.style.animationDelay = (Math.random() * 1) + 's';
         }
 

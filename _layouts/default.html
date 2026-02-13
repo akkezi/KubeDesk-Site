@@ -115,77 +115,81 @@
             }
         });
 
-        // App Simulator Logic
-        // App Simulator Logic
+        // ── App Simulator Logic ──────────────────────────────────────────────
+
         function switchTab(element, categoryId) {
-            // Remove active class from all sidebar items
-            document.querySelectorAll('.sidebar-item').forEach(item => {
-                item.classList.remove('active');
-            });
-
-            // Remove active class from all tab contents
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Add active class to clicked item
+            // Désactiver tous les onglets sidebar
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
             element.classList.add('active');
 
-            // Show target content
+            // Masquer tous les tab-content ET réinitialiser leurs cartes
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+                // Cacher toutes les cartes de cet onglet inactif
+                content.querySelectorAll('.content-card').forEach(card => {
+                    card.classList.remove('visible');
+                    card.style.opacity = '0';
+                    card.style.animationName = 'none';
+                });
+            });
+
+            // Afficher l'onglet cible et placer ses cartes
             const targetContent = document.getElementById(categoryId);
             targetContent.classList.add('active');
-
-            // Trigger Randomization
             randomizeCards(targetContent);
         }
 
         function randomizeCards(container) {
-            // Double rAF : garantit que le DOM est peint et que le container a ses vraies dimensions
+            // Double rAF : garantit que le container est rendu avec ses vraies dimensions
             requestAnimationFrame(() => requestAnimationFrame(() => {
-                const cards = Array.from(container.querySelectorAll('.content-card'));
                 const isSmallScreen = window.innerWidth <= 1024;
 
-                // Vraies dimensions du container en pixels
-                const containerW = container.offsetWidth  || 300;
-                const containerH = container.offsetHeight || 400;
+                // Mesurer le vrai container de positionnement (.app-content)
+                const appContent = container.closest('.app-content') || container;
+                const containerW = appContent.offsetWidth  || 320;
+                const containerH = appContent.offsetHeight || 380;
 
-                const CARD_W = isSmallScreen ? 120 : 160;
-                const CARD_H = 44;
-                const MARGIN = 8;
-
+                const CARD_W  = isSmallScreen ? 130 : 160;
+                const CARD_H  = 40;
+                const MARGIN  = 10;
                 const numCols = isSmallScreen ? 2 : 4;
 
-                // Shuffle
+                const cards = Array.from(container.querySelectorAll('.content-card'));
                 cards.sort(() => Math.random() - 0.5);
+
+                // Initialiser le drag une seule fois par carte
+                cards.forEach(card => {
+                    if (!card.dataset.draggable) {
+                        card.dataset.draggable = 'true';
+                        makeDraggable(card);
+                    }
+                });
 
                 // Répartir en colonnes
                 const columns = Array.from({ length: numCols }, () => []);
                 cards.forEach((card, i) => columns[i % numCols].push(card));
 
+                const colPxWidth = containerW / numCols;
+
                 columns.forEach((colItems, colIndex) => {
                     if (colItems.length === 0) return;
 
-                    const colPxWidth = containerW / numCols;
                     const xMin = colIndex * colPxWidth + MARGIN;
-                    const xMax = xMin + colPxWidth - CARD_W - MARGIN;
+                    const xMax = Math.max(xMin, xMin + colPxWidth - CARD_W - MARGIN);
+                    const usableH = Math.max(CARD_H, containerH - CARD_H - MARGIN * 2);
 
                     colItems.forEach((card, i) => {
                         card.classList.remove('visible');
-                        makeDraggable(card);
 
-                        // Répartition verticale sur toute la hauteur
-                        const usableH = containerH - CARD_H - MARGIN * 2;
-                        let baseY;
-                        if (colItems.length > 1) {
-                            baseY = (i / (colItems.length - 1)) * usableH;
-                        } else {
-                            baseY = usableH / 2;
-                        }
-                        const jitterY = (Math.random() - 0.5) * containerH * 0.12;
-                        const topPx = Math.max(MARGIN, Math.min(usableH + MARGIN, baseY + jitterY));
+                        // Distribution verticale uniforme + jitter
+                        let baseY = colItems.length > 1
+                            ? (i / (colItems.length - 1)) * usableH
+                            : usableH / 2;
+                        const jitterY = (Math.random() - 0.5) * containerH * 0.10;
+                        const topPx = Math.max(MARGIN, Math.min(usableH, baseY + jitterY));
 
                         // Position X dans la colonne
-                        const leftPx = Math.max(MARGIN, xMin + Math.random() * Math.max(0, xMax - xMin));
+                        const leftPx = xMin + Math.random() * Math.max(0, xMax - xMin);
 
                         card.style.left = leftPx + 'px';
                         card.style.top  = topPx  + 'px';
@@ -199,22 +203,18 @@
 
         function applyAnimation(card, isMobile) {
             if (isMobile) {
-                // Animations nuage doux : multi-directionnelles, naturelles
                 const cloudAnims = ['cloud-a', 'cloud-b', 'cloud-c', 'cloud-d', 'cloud-e'];
-                const randomAnim = cloudAnims[Math.floor(Math.random() * cloudAnims.length)];
-                card.style.animationName = randomAnim;
-                // Durées longues et variées pour un effet nuage naturel (6s à 14s)
+                card.style.animationName     = cloudAnims[Math.floor(Math.random() * cloudAnims.length)];
                 card.style.animationDuration = (6 + Math.random() * 8) + 's';
-                card.style.animationDelay = (Math.random() * 4) + 's';
+                card.style.animationDelay    = (Math.random() * 3) + 's';
             } else {
                 const anims = ['float', 'float1', 'float2', 'float3'];
-                const randomAnim = anims[Math.floor(Math.random() * anims.length)];
-                card.style.animationName = randomAnim;
+                card.style.animationName     = anims[Math.floor(Math.random() * anims.length)];
                 card.style.animationDuration = (4 + Math.random() * 3) + 's';
-                card.style.animationDelay = (Math.random() * 2) + 's';
+                card.style.animationDelay    = (Math.random() * 2) + 's';
             }
-            card.style.animationTimingFunction = 'ease-in-out';
-            card.style.animationIterationCount = 'infinite';
+            card.style.animationTimingFunction  = 'ease-in-out';
+            card.style.animationIterationCount  = 'infinite';
         }
 
         function makeDraggable(element) {
@@ -223,39 +223,25 @@
 
             const onStart = (e) => {
                 isDragging = true;
-                // Get touch or mouse position
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
                 startX = clientX;
                 startY = clientY;
-
                 const style = window.getComputedStyle(element);
                 initialLeft = parseFloat(style.left);
-                initialTop = parseFloat(style.top);
-
-                // Stop animation while dragging
-                element.style.animation = 'none';
-                element.style.zIndex = 100; // Bring to front
+                initialTop  = parseFloat(style.top);
+                element.style.animationName = 'none';
+                element.style.zIndex = 100;
                 element.style.cursor = 'grabbing';
             };
 
             const onMove = (e) => {
                 if (!isDragging) return;
-                e.preventDefault(); // Stop scrolling
-
+                e.preventDefault();
                 const clientX = e.touches ? e.touches[0].clientX : e.clientX;
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-                const dx = clientX - startX;
-                const dy = clientY - startY;
-
-                // Convert pixels to % roughly for the container? 
-                // Easier to just use pixels for drag, but let's try to update the left/top styles
-                // Since parent is relative, we can add pixels to the computed left/top
-
-                element.style.left = (initialLeft + dx) + 'px';
-                element.style.top = (initialTop + dy) + 'px';
+                element.style.left = (initialLeft + clientX - startX) + 'px';
+                element.style.top  = (initialTop  + clientY - startY) + 'px';
             };
 
             const onEnd = () => {
@@ -263,21 +249,17 @@
                 isDragging = false;
                 element.style.cursor = 'grab';
                 element.style.zIndex = '';
-                // Optional: Resume animation? User might want it to stay put.
-                // Leaving animation off makes it feel like you "placed" it.
             };
 
-            element.addEventListener('mousedown', onStart);
+            element.addEventListener('mousedown',  onStart);
             element.addEventListener('touchstart', onStart, { passive: false });
-
-            window.addEventListener('mousemove', onMove);
-            window.addEventListener('touchmove', onMove, { passive: false });
-
-            window.addEventListener('mouseup', onEnd);
-            window.addEventListener('touchend', onEnd);
+            window.addEventListener('mousemove',   onMove);
+            window.addEventListener('touchmove',   onMove, { passive: false });
+            window.addEventListener('mouseup',     onEnd);
+            window.addEventListener('touchend',    onEnd);
         }
 
-        // Init first tab on load
+        // Init premier onglet au chargement
         document.addEventListener('DOMContentLoaded', () => {
             const startTab = document.querySelector('.sidebar-item.active');
             if (startTab) switchTab(startTab, 'dashboard');

@@ -605,7 +605,8 @@ h6 {
 @media (max-width: 768px) {
     .app-simulator {
         flex-direction: column;
-        min-height: 70vh;
+        min-height: unset;
+        height: auto;
 
         /* Edge to Edge Fix */
         margin-left: -20px;
@@ -634,18 +635,29 @@ h6 {
     }
 
     .app-content {
-        flex: 1;
+        flex: none;
         width: 100%;
-        height: calc(70vh - 52px); /* hauteur totale moins la sidebar */
-        min-height: 400px;
+        height: 360px;       /* hauteur fixe, compacte sur mobile */
         overflow: hidden;
         position: relative;
     }
 
-    /* content-grid doit hériter de la vraie hauteur de son parent */
-    .app-content .content-grid,
+    /* tab-content occupe tout l'espace de app-content */
     .app-content .tab-content,
     .app-content .tab-content.active {
+        position: absolute;
+        inset: 0;           /* top/right/bottom/left: 0 */
+        width: 100%;
+        height: 100%;
+        display: none;      /* caché par défaut */
+    }
+
+    .app-content .tab-content.active {
+        display: block;     /* visible uniquement si actif */
+    }
+
+    /* content-grid remplit le tab-content */
+    .app-content .content-grid {
         position: relative;
         width: 100%;
         height: 100%;

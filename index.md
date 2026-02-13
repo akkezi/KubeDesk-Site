@@ -309,14 +309,18 @@ title: Home
         <p class="install-subtitle">Get started in seconds. Download the latest release related to your OS.</p>
         <div class="install-tabs">
             <div class="code-block">
-                <div class="code-header">Windows (Coming to Winget soon)</div>
-                <pre><code># Download the installer from Releases
-KubeDesk Setup 0.3.4.exe</code></pre>
+                <div class="code-header">Installer versions</div>
+                <pre><code># Coming soon
+														 Coming soon
+										 </code>
+								</pre>
             </div>
             <div class="code-block">
-                <div class="code-header">Portable</div>
-                <pre><code># Run without installation
-KubeDesk 0.3.4.exe</code></pre>
+                <div class="code-header">Portable versions</div>
+                <pre><code># Coming soon
+														 Coming soon
+										  </code>
+								</pre>
             </div>
         </div>
         <div class="cta-bottom">

@@ -172,27 +172,20 @@ h6 {
     background-color: #0d1117;
 }
 
-display: flex;
-justify-content: center;
-gap: 30px;
-flex-wrap: wrap;
-margin-bottom: 120px;
-/* Increased from 80px */
-align-items: center;
-width: 100%;
-padding: 0 20px;
-/* Add padding for mobile safety */
+.download-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 120px;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
 }
 
 /* Base Pill Button - Glassmorphism */
 /* Base Pill Button - Matches preview.html */
 .btn-pill {
-    /* Reset button styles */
-    appearance: none;
-    -webkit-appearance: none;
-    border: none;
-    outline: none;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -211,8 +204,6 @@ padding: 0 20px;
     box-shadow: 0 4px 0 rgba(0, 0, 0, 1);
     letter-spacing: 0.3px;
     font-family: var(--font-stack);
-    position: relative;
-    overflow: hidden;
 }
 
 .btn-pill:hover {

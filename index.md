@@ -9,6 +9,7 @@ title: Home
         <h1>The Desktop Client for Kubernetes Cluster Management</h1>
         <p class="subtitle">Gain complete visibility into your clusters. Browse, inspect, and analyze all Kubernetes objects in real-time. Built with Electron, React, and Go.</p>
         
+        <div class="download-buttons">
             <!-- macOS Dropdown -->
             <div class="dropdown">
                 <button class="btn-pill btn-mac">
@@ -45,6 +46,7 @@ title: Home
                     <a href="https://github.com/akkezi/KubeDesk/releases/latest/download/kubedesk.x86_64.rpm">RedHat / Fedora (.rpm)</a>
                 </div>
             </div>
+        </div>
         
         <div class="hero-image">
             <img src="{{ site.baseurl }}/assets/images/screenshots/001.png" alt="KubeDesk Dashboard" class="app-screenshot">

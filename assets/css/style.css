@@ -187,6 +187,12 @@ padding: 0 20px;
 /* Base Pill Button - Glassmorphism */
 /* Base Pill Button - Matches preview.html */
 .btn-pill {
+    /* Reset button styles */
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;

@@ -127,8 +127,11 @@
                 content.classList.remove('active');
                 content.querySelectorAll('.content-card').forEach(card => {
                     card.classList.remove('visible');
-                    card.style.opacity       = '0';
-                    card.style.animationName = 'none';
+                    // Supprimer les styles inline pour ne pas bloquer .visible
+                    card.style.removeProperty('opacity');
+                    card.style.removeProperty('animation-name');
+                    card.style.removeProperty('animation-duration');
+                    card.style.removeProperty('animation-delay');
                 });
             });
 
@@ -186,6 +189,8 @@
 
                     items.forEach((card, i) => {
                         card.classList.remove('visible');
+                    // Nettoyer les styles inline résiduels pour éviter les conflits
+                    card.style.removeProperty('opacity');
 
                         // Distribution verticale uniforme sur toute la hauteur
                         const baseY  = items.length > 1 ? (i / (items.length - 1)) * yMax : yMax / 2;

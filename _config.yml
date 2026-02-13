@@ -1,7 +1,7 @@
 title: KubeDesk
 description: Native Kubernetes Desktop App for Windows, macOS, and Linux
 url: "https://akkezi.github.io"
-baseurl: "/KubeDesk-Site"
+baseurl: "/kubedesk-site"
 theme: jekyll-theme-slate
 plugins:
   - jekyll-seo-tag

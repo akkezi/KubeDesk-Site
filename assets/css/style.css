@@ -71,8 +71,9 @@ h6 {
 }
 
 .site-l.os-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    /* Slightly larger */
+    height: 24px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -155,7 +156,10 @@ h6 {
     transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
     border: none;
     font-family: var(--font-stack);
-    min-width: 220px;
+    min-width: 240px;
+    /* Ensured width */
+    white-space: nowrap;
+    /* Prevent line wrapping */
 }
 
 .btn-pill:hover {
@@ -213,10 +217,25 @@ h6 {
     border: 1px solid var(--border-color);
     z-index: 1000;
     margin-top: 10px;
+    /* Gap maintained for visual separation */
     left: 50%;
     transform: translateX(-50%);
     /* Center dropdown */
     overflow: hidden;
+    padding-top: 5px;
+    /* Internal padding */
+}
+
+/* Invisible Bridge to prevent closing */
+.dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    /* Fills the gap between button and menu */
+    background: transparent;
 }
 
 /* Links inside the dropdown */

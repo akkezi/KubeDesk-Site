@@ -557,8 +557,9 @@ h6 {
     }
 
     .app-content {
-        height: calc(100% - 60px);
-        /* Fill remaining space */
+        flex: 1;
+        /* Fill remaining space using Flexbox */
+        width: 100%;
         min-height: 300px;
     }
 

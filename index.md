@@ -311,16 +311,12 @@ title: Home
             <div class="code-block">
                 <div class="code-header">Installer versions</div>
                 <pre><code># Coming soon
-														 Coming soon
-										 </code>
-								</pre>
+Coming soon</code></pre>
             </div>
             <div class="code-block">
                 <div class="code-header">Portable versions</div>
                 <pre><code># Coming soon
-														 Coming soon
-										  </code>
-								</pre>
+Coming soon</code></pre>
             </div>
         </div>
         <div class="cta-bottom">

@@ -150,102 +150,67 @@
                 let rows = 4;
 
                 // Desktop Grid Logic
-                if (!isMobile) {
-                    if (count <= 6) { cols = 3; rows = 2; }
-                    else if (count <= 10) { cols = 4; rows = 3; }
+                // UNIVERSAL LOGIC: Deterministic Interpolated Distribution
+                // Works for both Mobile (2 cols) and Desktop (4 cols)
+                // Guaranteed to fill vertical space from 0% to 85%
 
-                    const slots = [];
-                    for (let r = 0; r < rows; r++) {
-                        for (let c = 0; c < cols; c++) {
-                            slots.push({ x: c, y: r });
-                        }
-                    }
-                    slots.sort(() => Math.random() - 0.5);
+                // 1. Determine Columns based on width
+                // Match CSS breakpoint exact behavior if possible, or just use width
+                const isSmallScreen = window.innerWidth <= 1024;
+                const numCols = isSmallScreen ? 2 : 4;
 
-                    cards.forEach((card, index) => {
+                // 2. Shuffle cards
+                cards.sort(() => Math.random() - 0.5);
+
+                // 3. Split into N columns
+                const columns = Array.from({ length: numCols }, () => []);
+                cards.forEach((card, i) => {
+                    columns[i % numCols].push(card);
+                });
+
+                // 4. Distribute each column
+                columns.forEach((colItems, colIndex) => {
+                    if (colItems.length === 0) return;
+
+                    // Calculate horizontal bounds for this column
+                    const colWidth = 100 / numCols;
+                    const xMin = (colIndex * colWidth);
+                    const xMax = xMin + colWidth - 10; // -10% padding
+
+                    colItems.forEach((card, i) => {
                         card.classList.remove('visible');
                         makeDraggable(card);
 
-                        if (index < slots.length) {
-                            const slot = slots[index];
-                            const stepX = 90 / cols;
-
-                            // FORCE vertical spread: First row at top, Last row at bottom
-                            // Map row index (0 to rows-1) to (10% to 80%)
-                            const safeRows = rows > 1 ? rows - 1 : 1;
-                            const BaseY = 10 + (slot.y / safeRows) * 70;
-
-                            const BaseX = 5 + (slot.x * stepX);
-
-                            const offsetX = (Math.random() - 0.5) * 15;
-                            const offsetY = (Math.random() - 0.5) * 15;
-
-                            card.style.left = Math.max(0, Math.min(90, BaseX + offsetX)) + '%';
-                            card.style.top = Math.max(0, Math.min(90, BaseY + offsetY)) + '%';
-
-                            applyAnimation(card, false);
-
-                            setTimeout(() => { card.classList.add('visible'); }, index * 30);
+                        // Vertical Interpolation: Pin 0% and 85%
+                        let BaseY = 0;
+                        if (colItems.length > 1) {
+                            BaseY = (i / (colItems.length - 1)) * 85;
+                        } else {
+                            BaseY = 40; // Center if single item
                         }
+
+                        // Add randomness
+                        // Jitter Y: +/- 5%
+                        const Top = Math.max(0, Math.min(90, BaseY + (Math.random() * 10 - 5)));
+
+                        // Random X within column
+                        const Left = xMin + 2 + (Math.random() * (colWidth - 15));
+
+                        card.style.left = Left + '%';
+                        card.style.top = Top + '%';
+
+                        // Apply Dynamic Animation
+                        applyAnimation(card, isSmallScreen);
+                        setTimeout(() => { card.classList.add('visible'); }, i * 50);
                     });
-                } else {
-                    // MOBILE: Deterministic "Interpolated" Scale
-                    // Guaranteed to fill from 0% to 90% regardless of item count
-                    
-                    // 1. Shuffle
-                    cards.sort(() => Math.random() - 0.5);
-                    
-                    // 2. Split (optional, but good for density)
-                    const col1 = [];
-                    const col2 = [];
-                    cards.forEach((card, i) => {
-                        if (i % 2 === 0) col1.push(card);
-                        else col2.push(card);
-                    });
-                    
-                    // 3. Helper: Distribute by pinning first/last to edges
-                    const distributeColumn = (items, xMin, xMax) => {
-                        if (items.length === 0) return;
-                        
-                        items.forEach((card, i) => {
-                            card.classList.remove('visible');
-                            makeDraggable(card);
-                            
-                            // Interpolated Y: 
-                            // i=0 -> 0%
-                            // i=max -> 85%
-                            // If only 1 item -> 40% (center)
-                            let BaseY = 0;
-                            if (items.length > 1) {
-                                BaseY = (i / (items.length - 1)) * 85; 
-                            } else {
-                                BaseY = 40;
-                            }
-                            
-                            // Add randomness to Y (Jitter +/- 5%)
-                            const Top = Math.max(0, Math.min(90, BaseY + (Math.random() * 10 - 5)));
-                            
-                            // Random X in col
-                            const Left = xMin + (Math.random() * (xMax - xMin));
-                            
-                            card.style.top = Top + '%';
-                            card.style.left = Left + '%';
-                            
-                            applyAnimation(card, true);
-                            setTimeout(() => { card.classList.add('visible'); }, i * 50);
-                        });
-                    };
-                    
-                    distributeColumn(col1, 0, 40);
-                    distributeColumn(col2, 50, 95);
-                }
+                });
             });
         }
 
         function applyAnimation(card, isMobile) {
             const anims = ['float', 'float1', 'float2', 'float3'];
             let randomAnim = anims[Math.floor(Math.random() * anims.length)];
-            
+
             // On Mobile, use the dedicated dynamic animation
             if (isMobile) {
                 randomAnim = 'float-mobile';

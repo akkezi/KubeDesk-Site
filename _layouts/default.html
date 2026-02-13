@@ -187,14 +187,13 @@
                     });
                 } else {
                     // MOBILE: Pure Random Distribution (Chaos Mode)
-                    // Reset grid logic, just place them everywhere in the 90% box
+                    // Spread from 0% to 90% to use the absolute full surface
                     cards.forEach((card, index) => {
                         card.classList.remove('visible');
                         makeDraggable(card);
 
-                        // Random position 5% to 85%
-                        const randomX = 5 + (Math.random() * 80);
-                        const randomY = 5 + (Math.random() * 80); // Ensure full vertical use
+                        const randomX = Math.random() * 90;
+                        const randomY = Math.random() * 90;
 
                         card.style.left = randomX + '%';
                         card.style.top = randomY + '%';
@@ -212,8 +211,8 @@
             const randomAnim = anims[Math.floor(Math.random() * anims.length)];
 
             card.style.animationName = randomAnim;
-            // Faster speed as requested: 1s to 3s cycle (Mobile), 2s to 4s (Desktop)
-            card.style.animationDuration = isMobile ? (1.5 + Math.random() * 1.5) + 's' : (2 + Math.random() * 2) + 's';
+            // Faster speed: 1s to 3s cycle (Mobile)
+            card.style.animationDuration = isMobile ? (1 + Math.random() * 2) + 's' : (2 + Math.random() * 2) + 's';
             card.style.animationDelay = (Math.random() * 1) + 's';
         }
 

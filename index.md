@@ -10,18 +10,7 @@ title: Home
         <p class="subtitle">Gain complete visibility into your clusters. Browse, inspect, and analyze all Kubernetes objects in real-time. Built with Electron, React, and Go.</p>
         
         <div class="download-buttons">
-            <!-- macOS Dropdown -->
-            <div class="dropdown">
-                <a href="#" class="btn-pill btn-mac">
-                    <img src="{{ site.baseurl }}/assets/images/apple.svg" class="os-icon" alt="macOS">
-                    <span>Download for macOS</span>
-                </a>
-                <div class="dropdown-menu">
-                    <a href="https://github.com/akkezi/KubeDesk/releases/latest/download/KubeDesk-mac-arm64.dmg">Apple Silicon</a>
-                    <a href="https://github.com/akkezi/KubeDesk/releases/latest/download/KubeDesk-mac-x64.dmg">Intel Chip</a>
-                </div>
-            </div>
-
+				
             <!-- Windows Dropdown -->
             <div class="dropdown">
                 <a href="#" class="btn-pill btn-win">
@@ -33,7 +22,7 @@ title: Home
                     <a href="https://github.com/akkezi/KubeDesk/releases/latest/download/KubeDesk-Portable.exe">Portable (.exe)</a>
                 </div>
             </div>
-
+						
             <!-- Linux Dropdown -->
             <div class="dropdown">
                 <a href="#" class="btn-pill btn-linux">
@@ -46,6 +35,19 @@ title: Home
                     <a href="https://github.com/akkezi/KubeDesk/releases/latest/download/kubedesk.x86_64.rpm">RedHat / Fedora (.rpm)</a>
                 </div>
             </div>
+						
+            <!-- macOS Dropdown -->
+            <div class="dropdown">
+                <a href="#" class="btn-pill btn-mac">
+                    <img src="{{ site.baseurl }}/assets/images/apple.svg" class="os-icon" alt="macOS">
+                    <span>Download for macOS</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="https://github.com/akkezi/KubeDesk/releases/latest/download/KubeDesk-mac-arm64.dmg">Apple Silicon</a>
+                    <a href="https://github.com/akkezi/KubeDesk/releases/latest/download/KubeDesk-mac-x64.dmg">Intel Chip</a>
+                </div>
+            </div>
+						
         </div>
         
         <div class="hero-image">

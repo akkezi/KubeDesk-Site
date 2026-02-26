@@ -5,3 +5,4 @@ _site/
 gemfiles/
 Gemfile.lock
 preview.html
+.zenflow

@@ -305,24 +305,3 @@ title: Home
     </div>
 </section>
 
-<section class="installation">
-    <div class="container">
-        <h2>Installation</h2>
-        <p class="install-subtitle">Get started in seconds. Download the latest release related to your OS.</p>
-        <div class="install-tabs">
-            <div class="code-block">
-                <div class="code-header">Installer versions</div>
-                <pre><code># Coming soon
-Coming soon</code></pre>
-            </div>
-            <div class="code-block">
-                <div class="code-header">Portable versions</div>
-                <pre><code># Coming soon
-Coming soon</code></pre>
-            </div>
-        </div>
-        <div class="cta-bottom">
-            <a href="https://github.com/akkezi/KubeDesk/releases" class="btn btn-secondary">View all releases on GitHub</a>
-        </div>
-    </div>
-</section>

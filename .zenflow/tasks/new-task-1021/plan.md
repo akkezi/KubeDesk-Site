@@ -29,7 +29,8 @@ Difficulty: **medium**. Stack is Jekyll (GitHub Pages), no build system, pure st
 
 ---
 
-### [ ] Step: Remove installation section from index.md
+### [x] Step: Remove installation section from index.md
+<!-- chat-id: 90b81dd7-ff1d-499c-a970-9f809c2cf975 -->
 - Delete the `<section class="installation">...</section>` block (end of `index.md`)
 - Update `assets/css/style.css`: remove `.installation` from the compound `h2` selector
 

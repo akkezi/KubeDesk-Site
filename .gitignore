@@ -6,3 +6,4 @@ gemfiles/
 Gemfile.lock
 preview.html
 .zenflow/
+.zenflow-images/

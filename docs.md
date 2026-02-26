@@ -3,11 +3,11 @@ layout: default
 title: Documentation
 ---
 
-<div class="markdown-content">
+<div class="markdown-content" markdown="1">
 
 # Documentation
 
-Welcome to the KubeDesk documentation. KubeDesk is a native desktop application for Kubernetes cluster management, built with Electron, React, and Go.
+Welcome to the KubeDesk documentation. KubeDesk is a Desktop Client for Kubernetes Cluster Management, built with Electron, React, and Go.
 
 ## Getting Started
 
@@ -58,9 +58,7 @@ KubeDesk automatically detects kubeconfig files from the default location (`~/.k
 
 KubeDesk reads from your existing kubeconfig file and respects all configured contexts, namespaces, and cluster credentials. No additional configuration is required.
 
-## Source Code
-
-KubeDesk is fully open source. Explore the source code, report issues, or contribute on GitHub:
+## GitHub
 
 - **Repository**: [github.com/akkezi/KubeDesk](https://github.com/akkezi/KubeDesk)
 - **Issues**: [github.com/akkezi/KubeDesk/issues](https://github.com/akkezi/KubeDesk/issues)
@@ -68,6 +66,6 @@ KubeDesk is fully open source. Explore the source code, report issues, or contri
 
 ## License
 
-KubeDesk is released under the [MIT License]({{ site.baseurl }}/terms).
+KubeDesk is licensed under the [Mozilla Public License 2.0 (MPL-2.0)](https://www.mozilla.org/en-US/MPL/2.0/). See the [Terms of Service]({{ site.baseurl }}/terms) for details.
 
 </div>

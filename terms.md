@@ -3,29 +3,26 @@ layout: default
 title: Terms of Service
 ---
 
-<div class="markdown-content">
+<div class="markdown-content" markdown="1">
 
 # Terms of Service
 
 **Last updated: February 2026**
 
-KubeDesk is free and open-source software released under the [MIT License](https://opensource.org/licenses/MIT). By using the KubeDesk application or website, you agree to the following terms.
+KubeDesk is a Desktop Client for Kubernetes Cluster Management licensed under the [Mozilla Public License 2.0 (MPL-2.0)](https://www.mozilla.org/en-US/MPL/2.0/). By using the KubeDesk application or website, you agree to the following terms.
 
-## 1. MIT License
+## 1. License
 
-KubeDesk is distributed under the **MIT License (version 2)**:
+KubeDesk is distributed under the **Mozilla Public License 2.0 (MPL-2.0)**. This means:
 
-> Copyright (c) 2024 KubeDesk Contributors
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
->
-> **THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.**
+- You may use, copy, and distribute the software
+- You may modify the software; modified files must remain under the MPL-2.0
+- Larger works combining KubeDesk with other code may be distributed under different terms, provided MPL-2.0-covered files remain under MPL-2.0
+- The full license text is available at [mozilla.org/en-US/MPL/2.0](https://www.mozilla.org/en-US/MPL/2.0/)
 
 ## 2. No Warranty
 
-KubeDesk is provided **"as is"** without warranty of any kind. The authors make no guarantees regarding:
+KubeDesk is provided **"as is"** without warranty of any kind, express or implied. The authors make no guarantees regarding:
 
 - Fitness for a particular purpose
 - Availability or uptime of the software
@@ -44,15 +41,11 @@ You agree not to use KubeDesk to:
 - Violate any applicable laws or regulations
 - Harm, disrupt, or overload cluster infrastructure
 
-## 5. Contributions
+## 5. Changes to These Terms
 
-By submitting contributions (code, issues, documentation) to the KubeDesk repository, you agree that your contributions will be licensed under the same MIT License.
+These terms may be updated at any time. Continued use of the software after changes constitutes acceptance of the revised terms.
 
-## 6. Changes to These Terms
-
-These terms may be updated at any time. Changes will be committed to the public GitHub repository. Continued use of the software after changes constitutes acceptance of the revised terms.
-
-## 7. Contact
+## 6. Contact
 
 For questions about these terms, please [open an issue](https://github.com/akkezi/KubeDesk/issues) on GitHub.
 

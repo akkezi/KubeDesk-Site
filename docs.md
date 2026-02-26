@@ -51,14 +51,14 @@ KubeDesk automatically detects kubeconfig files from the default location (`~/.k
 
 ## Requirements
 
-| Component | Minimum Version |
+|   Component   |   Minimum Version   |
 |---|---|
-| Kubernetes | 1.20+ |
-| kubeconfig | Any valid kubeconfig file |
-| Windows | Windows 10 or later |
-| Linux (deb) | Debian (Buster) 10+ / Ubuntu 20.04+ / Fedora 34+ or equivalent |
-| Linux (rpm) | Redhat 7+ / AlmaLinux 7+ / RockyLinux 7+ + or equivalent |
-| macOS | 11 (Big Sur) or later |
+|   Kubernetes   |   1.20+   |
+|   kubeconfig   |   Any valid kubeconfig file   |
+|   Windows   |   Windows 10 or later   |
+|   Linux (deb)   |   Debian (Buster) 10+ / Ubuntu 20.04+ / Fedora 34+ or equivalent   |
+|   Linux (rpm)   |   Redhat 7+ / AlmaLinux 7+ / RockyLinux 7+ + or equivalent   |
+|   macOS   |   11 (Big Sur) or later   |
 
 ## Configuration
 

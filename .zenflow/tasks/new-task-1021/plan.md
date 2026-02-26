@@ -48,7 +48,8 @@ Difficulty: **medium**. Stack is Jekyll (GitHub Pages), no build system, pure st
 - Add `.site-nav` mobile slide-in drawer styles + `.nav-open` state
 - Add `.markdown-content` styles for docs/privacy/terms pages
 
-### [ ] Step: Create privacy.md, terms.md, and docs.md pages
+### [x] Step: Create privacy.md, terms.md, and docs.md pages
+<!-- chat-id: b8ce6076-7318-472c-85a5-dac2008e2a7a -->
 - `privacy.md`: Privacy Policy under MIT License 2 context, `layout: default`
 - `terms.md`: Terms of Service under MIT License 2, `layout: default`
 - `docs.md`: Documentation landing page with getting started, links to GitHub README/releases, `layout: default`

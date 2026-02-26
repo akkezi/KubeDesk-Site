@@ -34,7 +34,8 @@ Difficulty: **medium**. Stack is Jekyll (GitHub Pages), no build system, pure st
 - Delete the `<section class="installation">...</section>` block (end of `index.md`)
 - Update `assets/css/style.css`: remove `.installation` from the compound `h2` selector
 
-### [ ] Step: Fix duplicate footer and update nav in default.html
+### [x] Step: Fix duplicate footer and update nav in default.html
+<!-- chat-id: 66e7d09a-6920-4d9e-87bd-42f573a46181 -->
 - Merge the two `<footer class="site-footer">` blocks into one
 - Update footer links: Privacy → `/privacy`, Terms → `/terms`, add Documentation + Releases + Report an Issue
 - Update nav: add Documentation (`/docs`) and Releases (GitHub releases URL) links

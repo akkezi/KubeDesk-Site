@@ -21,9 +21,13 @@
                 <img src="{{ site.baseurl }}/assets/images/logo.png" alt="KubeDesk Logo" class="logo-img">
                 KubeDesk
             </a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
             <nav class="site-nav">
+                <a href="{{ site.baseurl }}/docs">Documentation</a>
+                <a href="https://github.com/akkezi/KubeDesk/releases" target="_blank">Releases</a>
                 <a href="https://github.com/akkezi/KubeDesk" target="_blank">GitHub</a>
-                <a href="{{ site.baseurl }}/docs">Docs</a>
             </nav>
         </div>
     </header>
@@ -36,21 +40,13 @@
         <div class="container">
             <p>&copy; {{ site.time | date: "%Y" }} KubeDesk. All rights reserved.</p>
             <div class="footer-links">
-                <a href="#">Privacy</a>
-                <a href="#">Terms</a>
-                <a href="https://github.com/akkezi/KubeDesk">GitHub</a>
-            </div>
-        </div>
-    </footer>
-
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-links">
+                <a href="{{ site.baseurl }}/privacy">Privacy</a>
+                <a href="{{ site.baseurl }}/terms">Terms</a>
+                <a href="{{ site.baseurl }}/docs">Documentation</a>
+                <a href="https://github.com/akkezi/KubeDesk/releases" target="_blank">Releases</a>
                 <a href="https://github.com/akkezi/KubeDesk" target="_blank">GitHub</a>
-                <a href="#">Documentation</a>
                 <a href="https://github.com/akkezi/KubeDesk/issues" target="_blank">Report an Issue</a>
             </div>
-            <p style="color: #484f58; font-size: 0.85rem;">&copy; {{ site.time | date: '%Y' }} KubeDesk</p>
         </div>
     </footer>
 
@@ -259,6 +255,15 @@
             if (active) {
                 const m = (active.getAttribute('onclick') || '').match(/switchTab\s*\([^,]+,\s*['"]([^'"]+)['"]/);
                 if (m) switchTab(active, m[1]);
+            }
+
+            const toggle = document.querySelector('.nav-toggle');
+            const nav = document.querySelector('.site-nav');
+            if (toggle && nav) {
+                toggle.addEventListener('click', () => {
+                    const open = nav.classList.toggle('nav-open');
+                    toggle.setAttribute('aria-expanded', open);
+                });
             }
         });
     </script>

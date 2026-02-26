@@ -7,26 +7,31 @@ title: Documentation
 
 # Documentation
 
-Welcome to the KubeDesk documentation. KubeDesk is a Desktop Client for Kubernetes Cluster Management, built with Electron, React, and Go.
+Welcome to the KubeDesk documentation. 
+
+KubeDesk is a Desktop Client for Kubernetes Cluster Management, built with Electron, React, and Go.
 
 ## Getting Started
 
 ### 1. Download KubeDesk
 
-Download the latest release for your operating system from the [Releases page](https://github.com/akkezi/KubeDesk/releases):
+Download the latest release for your operating system from the [Site](https://akkezi.github.io/kubedesk-site/):
 
-- **macOS (Apple Silicon)** — `KubeDesk-mac-arm64.dmg`
-- **macOS (Intel)** — `KubeDesk-mac-x64.dmg`
-- **Windows** — `KubeDesk-win-x64.exe`
-- **Linux (AppImage)** — `KubeDesk-linux-x86_64.AppImage`
-- **Linux (Debian/Ubuntu)** — `KubeDesk-linux-amd64.deb`
+- **Windows (Installer)** — `KubeDesk-x.y.z_Windows_Setup.exe`
+- **Windows (Portable)** — `KubeDesk-x.y.z_Windows_Portable.exe`
+- **Linux (Portable AppImage)** — `KubeDesk-x.y.z_Linux_Portable.AppImage`
+- **Linux (Debian/Ubuntu)** — `kubedesk-x.y.z_amd64.deb`
+- **Linux (Redhat/Fedora/AlmaLinux/RockyLinux)** — `kubedesk-x.y.z.x86_64.rpm`
+- **macOS (Intel Chip)** — `KubeDesk-x.y.z_macOS_intel.dmg`
+- **macOS (Apple Silicon - Soon)** — `KubeDesk-x.y.z_macOS_silicon.dmg`
 
 ### 2. Install KubeDesk
 
-- **macOS**: Open the `.dmg` file and drag KubeDesk to your Applications folder.
 - **Windows**: Run the `.exe` installer and follow the setup wizard.
-- **Linux (AppImage)**: Make the file executable (`chmod +x`) and run it directly.
-- **Linux (deb)**: Install with `sudo dpkg -i KubeDesk-linux-amd64.deb`.
+- **Linux (AppImage)**: Make the file executable (`chmod +x`) and run it directly (Require `libfuse2` installed on Linux).
+- **Linux (deb)**: Install with `sudo dpkg -i kubedesk-x.y.z_amd64.deb`.
+- **Linux (rpm)**: Install with `sudo rpm -Uvh kubedesk-x.y.z.x86_64.rpm`.
+- **macOS**: Open the `.dmg` file and drag KubeDesk to your Applications folder.
 
 ### 3. Connect to Your Cluster
 
@@ -50,13 +55,15 @@ KubeDesk automatically detects kubeconfig files from the default location (`~/.k
 |---|---|
 | Kubernetes | 1.20+ |
 | kubeconfig | Any valid kubeconfig file |
-| macOS | 11 (Big Sur) or later |
 | Windows | Windows 10 or later |
-| Linux | Ubuntu 20.04+ / Fedora 34+ or equivalent |
+| Linux (deb) | Debian (Buster) 10+ / Ubuntu 20.04+ / Fedora 34+ or equivalent |
+| Linux (rpm) | Redhat 7+ / AlmaLinux 7+ / RockyLinux 7+ + or equivalent |
+| macOS | 11 (Big Sur) or later |
 
 ## Configuration
 
-KubeDesk reads from your existing kubeconfig file and respects all configured contexts, namespaces, and cluster credentials. No additional configuration is required.
+KubeDesk reads from your existing kubeconfig file and respects all configured contexts, namespaces, and cluster credentials. 
+No additional configuration is required.
 
 ## GitHub
 

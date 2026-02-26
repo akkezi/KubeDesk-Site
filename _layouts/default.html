@@ -25,10 +25,12 @@
                 <span></span><span></span><span></span>
             </button>
             <nav class="site-nav">
+                <button class="nav-close" aria-label="Close navigation">&times;</button>
                 <a href="{{ site.baseurl }}/docs">Documentation</a>
                 <a href="https://github.com/akkezi/KubeDesk/releases" target="_blank">Releases</a>
                 <a href="https://github.com/akkezi/KubeDesk" target="_blank">GitHub</a>
             </nav>
+            <div class="nav-overlay"></div>
         </div>
     </header>
 
@@ -258,18 +260,28 @@
             }
 
             const toggle = document.querySelector('.nav-toggle');
+            const navClose = document.querySelector('.nav-close');
+            const navOverlay = document.querySelector('.nav-overlay');
+
+            function openNav() {
+                document.body.classList.add('nav-open');
+                toggle.setAttribute('aria-expanded', 'true');
+            }
+            function closeNav() {
+                document.body.classList.remove('nav-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+
             if (toggle) {
                 toggle.addEventListener('click', () => {
-                    const open = document.body.classList.toggle('nav-open');
-                    toggle.setAttribute('aria-expanded', open);
-                });
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        document.body.classList.remove('nav-open');
-                        toggle.setAttribute('aria-expanded', 'false');
-                    }
+                    document.body.classList.contains('nav-open') ? closeNav() : openNav();
                 });
             }
+            if (navClose) navClose.addEventListener('click', closeNav);
+            if (navOverlay) navOverlay.addEventListener('click', closeNav);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeNav();
+            });
         });
     </script>
 </body>

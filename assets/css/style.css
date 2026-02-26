@@ -61,7 +61,7 @@ h6 {
     top: 0;
     background-color: rgba(1, 4, 9, 0.9);
     backdrop-filter: blur(10px);
-    z-index: 1000;
+    z-index: 1060;
 }
 
 .site-header .container {
@@ -1156,6 +1156,11 @@ h6 {
     }
 }
 
+/* Nav close button — hidden on desktop */
+.nav-close {
+    display: none;
+}
+
 /* Nav Toggle (hamburger) — hidden on desktop */
 .nav-toggle {
     display: none;
@@ -1199,6 +1204,28 @@ h6 {
         display: flex;
     }
 
+    .nav-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 36px;
+        height: 36px;
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: 1.8rem;
+        cursor: pointer;
+        line-height: 1;
+        padding: 0;
+    }
+
+    .nav-close:hover {
+        color: var(--heading-color);
+    }
+
     .site-nav {
         display: none;
         flex-direction: column;
@@ -1234,12 +1261,16 @@ h6 {
     }
 
     /* Overlay behind the drawer */
-    .nav-open::before {
-        content: '';
+    .nav-overlay {
+        display: none;
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.6);
         z-index: 1040;
+    }
+
+    .nav-open .nav-overlay {
+        display: block;
     }
 }
 

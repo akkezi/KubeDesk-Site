@@ -42,7 +42,8 @@ Difficulty: **medium**. Stack is Jekyll (GitHub Pages), no build system, pure st
 - Add mobile hamburger toggle button to nav
 - Add inline JS for mobile nav toggle (`.nav-toggle` click → toggle `.nav-open` on `.site-nav`)
 
-### [ ] Step: Add responsive mobile nav and markdown page styles to style.css
+### [x] Step: Add responsive mobile nav and markdown page styles to style.css
+<!-- chat-id: 2659abd8-848d-48e7-b9a7-05f52bc39148 -->
 - Add `.nav-toggle` styles (hidden on desktop, visible on mobile)
 - Add `.site-nav` mobile slide-in drawer styles + `.nav-open` state
 - Add `.markdown-content` styles for docs/privacy/terms pages
